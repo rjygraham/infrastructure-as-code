@@ -26,3 +26,4 @@ When scheduling the remove script, you'll need to include values for the followi
 * Azure region of the route table
 * Name of the resource group which contains your route table
 * Name of the route table
+* Name of the KMS Server route, if being used.
