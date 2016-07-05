@@ -1,15 +1,15 @@
 ﻿Param
 (
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory = $true, HelpMessage='Azure region to which current routes will be compared.')]
     [String] $region,
 
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory = $true, HelpMessage='Name of the Route Table to update.')]
     [String] $routeTableName,
 
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory = $true, HelpMessage='Name of Resource Group in which the Route Table exists.')]
     [String] $resourceGroupName,
 
-    [Parameter(Mandatory = $false)]
+    [Parameter(Mandatory = $false, HelpMessage='Comma separated list of route names to ignore when removing old routes.')]
     [String] $ignoredRouteNames
 )
 
