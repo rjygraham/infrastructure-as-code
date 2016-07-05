@@ -10,7 +10,7 @@
     [String] $resourceGroupName,
 
     [Parameter(Mandatory = $false)]
-    [String] $kmsRouteName
+    [String] $ignoredRouteNames
 )
 
 # Stop script (fail safe) should we encounter errors. We wouldn't want to
@@ -87,14 +87,22 @@ $ipRange = ($regions | where-object Name -In $region).IpRange
 # Remove routes not contained in most recent file from RouteTable.
 $routeTable = Get-AzureRmRouteTable -Name $routeTableName -ResourceGroupName $resourceGroupName
 
+# Build the list of ignored routes if specified
+[System.Collections.ArrayList]$ignoredRoutes = @()
+If (-not [String]::IsNullOrWhiteSpace($ignoredRouteNames))
+{
+    $ignoredRoutes.AddRange($ignoredRouteNames.Split(","))
+}
+
+# Holding array for routes to be removed.
 [System.Collections.ArrayList]$routesToRemove = @()
 
 # First get the list of routes to remove without actually removing
 # so as to not disbturb the enumerable while we're enumerating.
 ForEach ($route in $routeTable.Routes)
 {
-    # Ensure we don't remove the KMS Server route that may have been added.
-    If ($kmsRouteName -eq $null -or $route.Name -ne $kmsRouteName)
+    # Ensure we don't remove UDRs not for Azure Public IPs.
+    If (-not $ignoredRoutes.Contains($route.Name))
     {
         $subnet = $route.Name.Replace("AzurePublic_", "").Replace("-", "/")
 
