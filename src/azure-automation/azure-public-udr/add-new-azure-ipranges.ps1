@@ -1,16 +1,16 @@
 ﻿Param
 (
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory = $true, HelpMessage='Azure region to which current routes will be compared.')]
     [String] $region,
 
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory = $true, HelpMessage='Name of the Route Table to update.')]
     [String] $routeTableName,
 
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory = $true, HelpMessage='Name of Resource Group in which the Route Table exists.')]
     [String] $resourceGroupName,
 	
     # Saving a single route for Azure KMS Server
-	[Parameter(Mandatory = $true)]
+	[Parameter(Mandatory = $true, HelpMessage='Maximum allowable quantity of routes to be added. Default quota is 100, make sure you submit support request to increase to 400.')]
     [Int] $maxAllowedRoutes = 99
 )
 
