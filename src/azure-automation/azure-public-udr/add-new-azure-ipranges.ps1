@@ -24,7 +24,7 @@ try
     # Get the connection "AzureRunAsConnection "
     $servicePrincipalConnection=Get-AutomationConnection -Name $connectionName         
 
-    Write-Information "Logging in to Azure..."
+    Write-Output "Logging in to Azure..."
     Add-AzureRmAccount `
         -ServicePrincipal `
         -TenantId $servicePrincipalConnection.TenantId `
@@ -57,11 +57,11 @@ do
     try
     {
         # Get and parse web page for updated list and then download the list
-        Write-Information "Attempting to download the download page..."
+        Write-Output "Attempting to download the download page..."
         $downloadPage = $webClient.DownloadString($downloadUri) 
         $xmlFileUri = ($downloadPage.Split('"') -like "https://*PublicIps*")[0]
 
-        Write-Information "Attempting to download the XML file..."
+        Write-Output "Attempting to download the XML file..."
         $response = $webClient.DownloadString($xmlFileUri)
     }
     catch 
