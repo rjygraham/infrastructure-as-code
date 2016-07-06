@@ -115,6 +115,10 @@ ForEach ($route in $routeTable.Routes)
             Write-Output "Route $($route.Name) still valid. Skipping."
         }	
     }
+    Else
+    {
+        Write-Output "Route $($route.Name) is ignored. Skipping."
+    }
 }
 
 # Now actually remove the routes.
