@@ -97,6 +97,7 @@ ForEach ($subnet in $ipRange.Subnet)
     $route = Get-AzureRmRouteConfig -RouteTable $routeTable -Name $routeName -ErrorAction SilentlyContinue
     If($route -eq $null)
     {
+        Write-Output "Adding $routeName..."
         Add-AzureRmRouteConfig -Name $routeName -AddressPrefix $subnet -NextHopType Internet -RouteTable $routeTable
     }
     Else

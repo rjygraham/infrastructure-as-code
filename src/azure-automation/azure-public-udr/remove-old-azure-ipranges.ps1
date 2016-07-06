@@ -120,6 +120,7 @@ ForEach ($route in $routeTable.Routes)
 # Now actually remove the routes.
 ForEach ($routeToRemove in $routesToRemove)
 {
+    Write-Output "Removing $routeToRemove..."
     Remove-AzureRmRouteConfig -Name $routeToRemove -RouteTable $routeTable
 }
 
