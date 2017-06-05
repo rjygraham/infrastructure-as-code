@@ -1,8 +1,8 @@
-#Purpose
+# Purpose
 
 The scripts in this folder are intended to automate the addition and removal of Azure Public IPs to Azure route tables. This enables traffic from Azure VMs to Azure public services like Azure Backup to take the most direct path which is especially useful in forced tunneling scenarios or in cases where you don't want this type of traffic to flow through firewalls in an Azure VNet.
 
-##Usage
+## Usage
 
 Create an Azure Automation account being sure to enable Azure Run As Connection and add the scripts as runbooks. Additionally, you'll need to submit a support request to increase the quota of user defined routes in your route table from 100 to the max of 400. When you submit your request, include the following information:
 
@@ -10,7 +10,7 @@ Create an Azure Automation account being sure to enable Azure Run As Connection 
 * Name of the resource group which contains your route table
 * Name of the route table
 
-##Scheduling
+## Scheduling
 
 The Azure Public IP list document is updated every Wednesday and the changes go into effect the following Monday. Because of this, the recommended schedule is to run the add script every Sunday and the remove script every Tuesday.
 
